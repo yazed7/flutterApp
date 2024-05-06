@@ -1,2 +1,2 @@
 # flutterApp
-Full Food delivery app with SqLite
+Restaurant app with SqLite
