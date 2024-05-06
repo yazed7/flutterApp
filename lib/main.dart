@@ -1,7 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant/Pages/HomePage.dart';
+import 'package:restaurant/authentication/login/view/login_page.dart';
+import 'package:restaurant/authentication/registration/view/register_page.dart';
+import 'package:restaurant/themes/theme_provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -9,13 +21,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hey Team!'),
-        ),
-      ),
+      home: LoginPage(),
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/home': (context) => HomePage(),
+      },
+      initialRoute: '/login',
+      theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }
