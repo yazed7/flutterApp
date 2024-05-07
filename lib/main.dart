@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant/Pages/HomePage.dart';
-import 'package:restaurant/authentication/login/view/login_page.dart';
-import 'package:restaurant/authentication/registration/view/register_page.dart';
-import 'package:restaurant/themes/theme_provider.dart';
+import 'Pages/HomePage.dart';
+import 'authentication/login/view/login_page.dart';
+import 'authentication/registration/view/register_page.dart';
+import 'themes/theme_provider.dart';
 
 void main() {
   runApp(

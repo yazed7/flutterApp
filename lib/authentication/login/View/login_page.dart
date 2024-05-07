@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/Components/button.dart';
-import 'package:restaurant/authentication/login/cubit/login_cubit.dart';
-
+import '../../../Components/button.dart';
 import '../../../themes/componentstheme.dart';
+import '../cubit/login_cubit.dart';
 
 class LoginPage extends StatelessWidget {
   static const String routeName = "/login";

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/Components/button.dart';
+import '../../../Components/button.dart';
 import '../../../themes/componentstheme.dart';
 import '../cubit/registertion_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
