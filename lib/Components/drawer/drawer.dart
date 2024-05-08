@@ -13,11 +13,9 @@ class MyDrawer extends StatelessWidget {
           children: [
             //1-app logo
             Padding(
-              padding: const EdgeInsets.only(top: 100),
-              child: Icon(
-                Icons.lock_open_rounded,
-                size: 80,
-                color: Theme.of(context).colorScheme.inversePrimary,
+              padding: const EdgeInsets.only(top: 100,right: 30),
+              child: Image.asset(
+                "assets/images/drawer.png",
               ),
             ),
             Padding(
