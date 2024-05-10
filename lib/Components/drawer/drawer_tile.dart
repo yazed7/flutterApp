@@ -7,6 +7,7 @@ class MyDrawerTile extends StatelessWidget {
   //hold a reference to a function taking no arguments and returning void
 
   const MyDrawerTile({
+    super.key, 
     this.text,
     this.icon,
     this.onTap,

@@ -43,7 +43,7 @@ class SettingPage extends StatelessWidget {
                 //representing an on/off or true/false state
                 CupertinoSwitch(
                   value: Provider.of<ThemeProvider>(context, listen: false)
-                          .isDarkMode,//means the initial is that dark mode is off
+                          .isDarkMode,//means the initial --> that dark mode --> off
                   onChanged: (value) =>
                       Provider.of<ThemeProvider>(context, listen: false)
                           .toggleTheme(),
