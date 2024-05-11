@@ -15,7 +15,9 @@ class MyDrawer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 100,right: 30),
               child: Image.asset(
-                "assets/images/drawer.png",
+                "assets/images/Logo.png",
+                height: 80,
+                width: 80,
               ),
             ),
             Padding(
