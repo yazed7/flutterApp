@@ -31,7 +31,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void onPressedConfirmButton(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamed(context, '/dashboard');
     }
   }
 }
