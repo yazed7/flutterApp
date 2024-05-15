@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant/Pages/Product/view/page/product_page.dart';
+import 'package:restaurant/Pages/Product/view/page/viewscreen_product.dart';
+import 'Pages/Dashboard/view/dashboard.dart';
 import 'Pages/HomePage.dart';
 import 'authentication/login/view/login_page.dart';
 import 'authentication/registration/view/register_page.dart';
@@ -26,6 +29,9 @@ class MainApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
+        '/dashboard': (context) => DashboardPage(),
+        '/product': (context) => ProductPage(),
+        '/views': (context) => viewscreen(),
         '/home': (context) => HomePage(),
       },
       initialRoute: '/login',
