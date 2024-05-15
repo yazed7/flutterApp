@@ -35,7 +35,7 @@ class LoginCubit extends Cubit<LoginState> {
       Map<String, dynamic>? user =
           await DatabaseHelper.instance.getUser(emailController.text);
       if (user != null && user['password'] == passwordController.text) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/dashboard');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
