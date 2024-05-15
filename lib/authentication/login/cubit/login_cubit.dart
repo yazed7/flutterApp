@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant/authentication/database/dbHelper.dart';
 
 part 'login_state.dart';
 
@@ -29,9 +30,20 @@ class LoginCubit extends Cubit<LoginState> {
     return null; //validation passed
   }
 
-  void onPressedConfirmButton(BuildContext context) {
+  void onPressedConfirmButton(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, '/home');
+      Map<String, dynamic>? user =
+          await DatabaseHelper.instance.getUser(emailController.text);
+      if (user != null && user['password'] == passwordController.text) {
+        Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please check Email or Password'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
     }
   }
 }

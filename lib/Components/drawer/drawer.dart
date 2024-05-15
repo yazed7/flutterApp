@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/Components/drawer/drawer_tile.dart';
 import 'package:restaurant/Pages/SettingPage.dart';
+import 'package:restaurant/authentication/login/View/login_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -13,7 +14,7 @@ class MyDrawer extends StatelessWidget {
           children: [
             //1-app logo
             Padding(
-              padding: const EdgeInsets.only(top: 100,right: 30),
+              padding: const EdgeInsets.only(top: 100, right: 30),
               child: Image.asset(
                 "assets/images/Logo.png",
                 height: 80,
@@ -50,10 +51,13 @@ class MyDrawer extends StatelessWidget {
 
             //logout
             MyDrawerTile(
-              text: "L O G O U T",
-              icon: Icons.logout,
-              onTap: () {},
-            ),
+                text: "L O G O U T",
+                icon: Icons.logout,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                }),
 
             const SizedBox(height: 25),
           ],
