@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant/authentication/database/dbHelper.dart';
 
 part 'registertion_state.dart';
 
@@ -42,6 +43,11 @@ class RegistertionCubit extends Cubit<RegistertionState> {
 
   void onPressedConfirmButton(BuildContext context) {
     if (formKey.currentState!.validate()) {
+      Map<String, dynamic> user = {
+        'email': emailController.text,
+        'password': passwordController.text,
+      };
+      DatabaseHelper.instance.insertUser(user);
       Navigator.pushNamed(context, '/login');
     }
   }
