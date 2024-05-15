@@ -28,6 +28,12 @@ class DatabaseHelper {
     ''');
   }
 
+  Future<void> _upgradeDB(Database db, int oldVersion, int newVersion) async {
+    await db.execute('DROP TABLE IF EXISTS users');
+
+    await _createDB(db, newVersion);
+  }
+
   Future<int> insertUser(Map<String, dynamic> row) async {
     Database db = await instance.database;
     return await db.insert('users', row);
@@ -35,7 +41,8 @@ class DatabaseHelper {
 
   Future<Map<String, dynamic>?> getUser(String email) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> users = await db.query('users', where: 'email = ?', whereArgs: [email]);
+    List<Map<String, dynamic>> users =
+        await db.query('users', where: 'email = ?', whereArgs: [email]);
     return users.isNotEmpty ? users.first : null;
   }
 }
