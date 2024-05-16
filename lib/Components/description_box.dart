@@ -18,14 +18,14 @@ class MyDescriptionBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.all(25),
-      margin: const EdgeInsets.only(left: 25,right: 25,bottom: 25),
+      margin: const EdgeInsets.only(left: 25,right: 25,bottom: 30),
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
               Text(
-                '\$12EGP',
+                '\$12 EGP',
                 style: myPrimaryTextStyle,
               ),
               Text(
