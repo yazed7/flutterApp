@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class MyCurrentLocation extends StatelessWidget {
-  const MyCurrentLocation({super.key});
+class MyPhoneContact extends StatelessWidget {
+  const MyPhoneContact({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MyCurrentLocation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Our main branch :",
+            "Contact us :",
             style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.bold,
@@ -23,7 +23,10 @@ class MyCurrentLocation extends StatelessWidget {
             child: Row(
               children: [
                 // address
-                Text("   Shebin-Stadium Street",
+                Text('''
+   +20 1016576855
+   +20 1062436769
+                ''',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontWeight: FontWeight.bold,
