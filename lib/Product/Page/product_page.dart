@@ -18,7 +18,7 @@ class ProductPage extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Products'),
+                title: const Text('Menu'),
                 backgroundColor: Theme.of(context).colorScheme.secondary,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),

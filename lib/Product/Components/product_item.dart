@@ -56,7 +56,7 @@ class ProductItem extends StatelessWidget {
                         // const SizedBox(
                         //   width: 20,
                         // ),
-                        Spacer(),
+                        const Spacer(),
                         // Favorite
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,18 +75,18 @@ class ProductItem extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text('Removed from favorites'),
-                                      backgroundColor: Colors.blueAccent,
+                                      backgroundColor: Colors.amber,
                                       duration: Duration(seconds: 1),
                                       behavior: SnackBarBehavior.floating,
                                       margin: EdgeInsets.all(20),
                                       elevation: 5,
                                       shape: Border(
                                         left: BorderSide(
-                                          color: Colors.blueAccent,
+                                          color: Colors.amber,
                                           width: 5,
                                         ),
                                         right: BorderSide(
-                                          color: Colors.blueAccent,
+                                          color: Colors.amber,
                                           width: 5,
                                         ),
                                       ),
@@ -98,18 +98,18 @@ class ProductItem extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text('Added to favorites'),
-                                      backgroundColor: Colors.blueAccent,
+                                      backgroundColor: Colors.amber,
                                       duration: Duration(seconds: 1),
                                       behavior: SnackBarBehavior.floating,
                                       margin: EdgeInsets.all(20),
                                       elevation: 5,
                                       shape: Border(
                                         left: BorderSide(
-                                          color: Colors.blueAccent,
+                                          color: Colors.amber,
                                           width: 5,
                                         ),
                                         right: BorderSide(
-                                          color: Colors.blueAccent,
+                                          color: Colors.amber,
                                           width: 5,
                                         ),
                                       ),

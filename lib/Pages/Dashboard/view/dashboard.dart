@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/Pages/HomePage.dart';
 // import 'package:restaurant/Pages/Product/view/page/product_page.dart';
 
+import '../../../Favorite/view/page/favorite_page.dart';
 import '../../../Product/Page/product_page.dart';
 import '../cubit/dashboard_cubit.dart';
 
@@ -25,7 +26,7 @@ class DashboardPage extends StatelessWidget {
                 children: const [
                   HomePage(),
                   ProductPage(),
-                  Text('Favorite'),
+                  FavoritePage(),
                 ],
               ),
               bottomNavigationBar: BottomNavigationBar(
@@ -39,7 +40,7 @@ class DashboardPage extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.list),
-                    label: 'Products',
+                    label: 'Menu',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.favorite),
