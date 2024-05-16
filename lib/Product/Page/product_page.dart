@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../Pages/Dashboard/view/dashboard.dart';
 import '../Components/product_item.dart';
 import '../cubit/product_cubit.dart';
 import './viewscreen_product.dart';
@@ -16,6 +17,16 @@ class ProductPage extends StatelessWidget {
         child: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
             return Scaffold(
+              appBar: AppBar(
+                title: const Text('Products'),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, DashboardPage.routeName);
+                  },
+                ),
+              ),
               body: state is ProductStateLoading
                   ? const Center(child: CircularProgressIndicator())
                   : state is ProductStateEmpty

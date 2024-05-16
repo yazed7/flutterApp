@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/Pages/Dashboard/view/dashboard.dart';
+import 'package:restaurant/Product/Page/product_page.dart';
 import '../Database/entity_model/product_model.dart';
 
 class viewscreen extends StatelessWidget {

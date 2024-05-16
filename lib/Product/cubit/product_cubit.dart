@@ -15,16 +15,16 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductStateLoading());
     await db.initDB();
     // await db.insertProduct(ProductModel(
-    //   name: 'CHEESEBURGER',
-    //   image: 'assets/images/product_01.png',
+    //   name: 'DOUBLE MUSHROOM SWISS',
+    //   image: 'assets/images/product_02.png',
     //   description: '''
-    //        You can’t go wrong with our cheeseburger, a signature flame-grilled beef patty topped with a simple layer of melted American cheese, crinkle cut pickles, yellow mustard, and ketchup on a toasted sesame seed bun.
+    //        Can't get enough of that heavenly creamy taste? Go for double the goodness! Melted Swiss cheese on two flame-grilled beef patties, topped with BK's special mushroom sauce, served on a sesame seed bun. Twice the velvety goodness in every bite.
     //         ''',
-    //   price: 130,
+    //   price: 145,
     //   favorite: 0,
     //   cart: 0,
     // ));
-    await db.deleteProduct(ProductModel(id: 10));
+    // await db.deleteProduct(ProductModel(id: 15));
     products = await db.getAllProducts();
 
     if (products.isEmpty) {
