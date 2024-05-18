@@ -13,12 +13,12 @@ class MyDescriptionBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.black,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.all(25),
-      margin: const EdgeInsets.only(left: 25,right: 25,bottom: 30),
+      margin: const EdgeInsets.only(left: 25,right: 25,bottom:0),
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
