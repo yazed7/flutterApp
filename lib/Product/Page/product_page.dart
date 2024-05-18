@@ -21,11 +21,23 @@ class ProductPage extends StatelessWidget {
                 title: const Text('Menu'),
                 backgroundColor: Theme.of(context).colorScheme.secondary,
                 leading: IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(
+                    Icons.arrow_circle_left_outlined,
+                    size: 30,
+                  ),
                   onPressed: () {
                     Navigator.popAndPushNamed(context, DashboardPage.routeName);
                   },
                 ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      // Navigator.pushNamed(context, CartPage.routeName);
+                    },
+                  )
+                ],
+                toolbarHeight: 70,
               ),
               body: state is ProductStateLoading
                   ? const Center(child: CircularProgressIndicator())

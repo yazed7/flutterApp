@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+import '../../../Pages/Dashboard/view/dashboard.dart';
 import '../../../Product/Page/viewscreen_product.dart';
 import '../../Component/favorite_item.dart';
 import '../../controller/cubit/favorite_cubit.dart';
@@ -17,6 +19,28 @@ class FavoritePage extends StatelessWidget {
         child: BlocBuilder<FavoriteCubit, FavoriteState>(
           builder: (context, state) {
             return Scaffold(
+              appBar: AppBar(
+                title: const Text('Favorite'),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_circle_left_outlined,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, DashboardPage.routeName);
+                  },
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      // Navigator.pushNamed(context, CartPage.routeName);
+                    },
+                  )
+                ],
+                toolbarHeight: 70,
+              ),
               body: state is FavoriteStateLoading
                   ? const Center(child: CircularProgressIndicator())
                   : state is FavoriteStateEmpty

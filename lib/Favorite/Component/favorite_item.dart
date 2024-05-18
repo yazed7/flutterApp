@@ -53,9 +53,7 @@ class FavoriteItem extends StatelessWidget {
                             // const SizedBox(height: 5),
                           ],
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
+                      
                         const Spacer(),
                         // Favorite
                         Column(
@@ -118,7 +116,6 @@ class FavoriteItem extends StatelessWidget {
                                 }
                               },
                             ),
-                            // Spacer(),
                             Text(
                               '${product.price} EGP',
                               style: TextStyle(
@@ -131,32 +128,7 @@ class FavoriteItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        // Container(
-                        //   width: 1,
-                        //   height: 35,
-                        //   color: Colors.grey,
-                        // ),
-                        // Cart
-                        // InkWell(
-                        //   child: product.cart == 1
-                        //       ? const Icon(
-                        //           CupertinoIcons.cart,
-                        //           color: Colors.blue,
-                        //         )
-                        //       : const Icon(CupertinoIcons.cart),
-                        //   onTap: () {
-                        //     if (product.favorite == 1) {
-                        //       controller.addItemtoFavorite(product.id ?? 0, 0);
-                        //     } else {
-                        //       controller.addItemtoFavorite(product.id ?? 0, 1);
-                        //     }
-                        //   },
-                        // ),
-                      ],
-                    )
+               
                   ],
                 ),
               ),

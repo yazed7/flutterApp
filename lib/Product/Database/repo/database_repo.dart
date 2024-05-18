@@ -143,11 +143,11 @@ class DatabaseRepo {
     return productModel;
   }
 
-  Future<void> updateCart(int cart, int id) async {
-    await db.update(
+  void updateCart(int crt, int id) {
+    db.update(
       'product',
       {
-        'cart`': cart,
+        'cart`': crt,
       },
       where: 'id =?',
       whereArgs: [id],

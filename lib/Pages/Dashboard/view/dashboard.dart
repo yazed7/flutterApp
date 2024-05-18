@@ -39,11 +39,11 @@ class DashboardPage extends StatelessWidget {
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.list),
+                    icon: Icon(Icons.restaurant_menu_outlined),
                     label: 'Menu',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite),
+                    icon: Icon(Icons.star_outlined),
                     label: 'Faverites',
                   ),
                 ],

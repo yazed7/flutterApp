@@ -131,7 +131,7 @@ class ProductItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                     
@@ -141,21 +141,21 @@ class ProductItem extends StatelessWidget {
                         //   color: Colors.grey,
                         // ),
                         // Cart
-                        // InkWell(
-                        //   child: product.cart == 1
-                        //       ? const Icon(
-                        //           CupertinoIcons.cart,
-                        //           color: Colors.blue,
-                        //         )
-                        //       : const Icon(CupertinoIcons.cart),
-                        //   onTap: () {
-                        //     if (product.favorite == 1) {
-                        //       controller.addItemtoFavorite(product.id ?? 0, 0);
-                        //     } else {
-                        //       controller.addItemtoFavorite(product.id ?? 0, 1);
-                        //     }
-                        //   },
-                        // ),
+                        InkWell(
+                          child: product.cart == 1
+                              ? const Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.blue,
+                                )
+                              : const Icon(Icons.shopping_cart_outlined),
+                          onTap: () {
+                            if (product.cart == 1) {
+                              controller.addItemtoCart(product.id ?? 0, 0);
+                            } else {
+                              controller.addItemtoCart(product.id ?? 0, 1);
+                            }
+                          },
+                        ),
                       ],
                     )
                   ],

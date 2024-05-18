@@ -1,14 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:restaurant/Pages/Dashboard/view/dashboard.dart';
-import 'package:restaurant/Product/Page/product_page.dart';
 import '../Database/entity_model/product_model.dart';
+import '../cubit/product_cubit.dart';
 
 class viewscreen extends StatelessWidget {
   const viewscreen({super.key});
   static const routeName = '/viewScreen';
   @override
   Widget build(BuildContext context) {
+    final ProductModel pro = ProductModel();
     var product = ModalRoute.of(context)?.settings.arguments as ProductModel;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -16,9 +19,12 @@ class viewscreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text('${product.name}'),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(
+              Icons.arrow_circle_left_outlined,
+              size: 30,
+            ),
             onPressed: () {
-              Navigator.pushNamed(context, DashboardPage.routeName);
+              Navigator.pop(context);
             },
           ),
         ),
@@ -39,7 +45,12 @@ class viewscreen extends StatelessWidget {
                     height: 400,
                   ),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Add to cart')),
+                    onPressed: () {
+                      // cartCubit.addItemtoCart(pro.id ?? 0, 1);
+                      // print(product.cart);
+                    },
+                    child: const Text('Add to cart'),
+                  ),
                 ],
               ),
             )),

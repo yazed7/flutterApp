@@ -30,8 +30,5 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     emit(FavoriteStateLoaded());
   }
 
-  void addItemtoCart(int id) async {
-    db.updateCart(1, id);
-    emit(FavoriteStateLoaded());
-  }
+
 }
