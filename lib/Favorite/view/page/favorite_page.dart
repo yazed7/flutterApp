@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Pages/Dashboard/view/dashboard.dart';
 import '../../../Product/Page/viewscreen_product.dart';
+import '../../../cart/view/cart-page.dart';
 import '../../Component/favorite_item.dart';
 import '../../controller/cubit/favorite_cubit.dart';
 
@@ -35,7 +36,7 @@ class FavoritePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      // Navigator.pushNamed(context, CartPage.routeName);
+                      Navigator.pushNamed(context, CartPage.routeName);
                     },
                   )
                 ],

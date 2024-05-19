@@ -40,9 +40,8 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductStateLoaded());
   }
 
-  void addItemtoCart(int id, int value) {
-    db.updateCart(value, id);
-    init();
+  void addItemtoCart(int id, bool value) async {
+    db.updateCart(id, value);
     emit(ProductStateLoaded());
   }
 }

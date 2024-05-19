@@ -34,7 +34,6 @@ class ProductItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset('${product.image}', width: 60, height: 60),
-
                         const SizedBox(width: 10),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -49,13 +48,8 @@ class ProductItem extends StatelessWidget {
                                 fontSize: 15,
                               ),
                             ),
-                            // const SizedBox(height: 5),
-                            
                           ],
                         ),
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
                         const Spacer(),
                         // Favorite
                         Column(
@@ -118,7 +112,6 @@ class ProductItem extends StatelessWidget {
                                 }
                               },
                             ),
-                            // Spacer(),
                             Text(
                               '${product.price} EGP',
                               style: TextStyle(
@@ -131,33 +124,6 @@ class ProductItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                    
-                        // Container(
-                        //   width: 1,
-                        //   height: 35,
-                        //   color: Colors.grey,
-                        // ),
-                        // Cart
-                        InkWell(
-                          child: product.cart == 1
-                              ? const Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.blue,
-                                )
-                              : const Icon(Icons.shopping_cart_outlined),
-                          onTap: () {
-                            if (product.cart == 1) {
-                              controller.addItemtoCart(product.id ?? 0, 0);
-                            } else {
-                              controller.addItemtoCart(product.id ?? 0, 1);
-                            }
-                          },
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),

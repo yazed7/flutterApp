@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant/Favorite/view/page/favorite_page.dart';
-// import 'package:restaurant/Pages/Product/view/page/product_page.dart';
-// import 'package:restaurant/Pages/Product/view/page/viewscreen_product.dart';
+import 'Favorite/view/page/favorite_page.dart';
 import 'Pages/Dashboard/view/dashboard.dart';
 import 'Pages/HomePage.dart';
 import 'Product/Page/product_page.dart';
 import 'Product/Page/viewscreen_product.dart';
 import 'authentication/login/view/login_page.dart';
 import 'authentication/registration/view/register_page.dart';
+import 'cart/view/cart-page.dart';
 import 'themes/theme_provider.dart';
 
 void main() {
@@ -30,15 +29,16 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
       routes: {
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegisterPage(),
-        '/dashboard': (context) => DashboardPage(),
-        '/product': (context) => ProductPage(),
-        '/favorite_page': (context) => FavoritePage(),
-        '/viewScreen': (context) => viewscreen(),
-        '/home': (context) => HomePage(),
+        LoginPage.routeName: (context) => LoginPage(),
+        RegisterPage.routeName: (context) => RegisterPage(),
+        DashboardPage.routeName: (context) => DashboardPage(),
+        ProductPage.routeName: (context) => ProductPage(),
+        FavoritePage.routeName: (context) => FavoritePage(),
+        CartPage.routeName: (context) => CartPage(),
+        viewscreen.routeName: (context) => viewscreen(),
+        HomePage.routeName: (context) => HomePage(),
       },
-      initialRoute: '/login',
+      initialRoute: LoginPage.routeName,
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

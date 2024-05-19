@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Pages/Dashboard/view/dashboard.dart';
+import '../../cart/view/cart-page.dart';
 import '../Components/product_item.dart';
 import '../cubit/product_cubit.dart';
 import './viewscreen_product.dart';
@@ -33,7 +34,7 @@ class ProductPage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      // Navigator.pushNamed(context, CartPage.routeName);
+                      Navigator.pushNamed(context, CartPage.routeName);
                     },
                   )
                 ],

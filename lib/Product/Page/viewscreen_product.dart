@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import '../../cart/cubit/cart_cubit.dart';
 import '../Database/entity_model/product_model.dart';
 import '../cubit/product_cubit.dart';
 
@@ -9,7 +8,9 @@ class viewscreen extends StatelessWidget {
   static const routeName = '/viewScreen';
   @override
   Widget build(BuildContext context) {
-    final ProductModel pro = ProductModel();
+    final ProductCubit procu = ProductCubit();
+    final CartCubit cartcubit = CartCubit();
+
     var product = ModalRoute.of(context)?.settings.arguments as ProductModel;
 
     return SafeArea(
@@ -46,8 +47,29 @@ class viewscreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // cartCubit.addItemtoCart(pro.id ?? 0, 1);
-                      // print(product.cart);
+                      if (product.cart == 1) {
+                        procu.addItemtoCart(product.id ?? 0, true);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Added to cart'),
+                            backgroundColor: Colors.blueAccent,
+                            duration: Duration(seconds: 1),
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(20),
+                            elevation: 5,
+                            shape: Border(
+                              left: BorderSide(
+                                color: Colors.blueAccent,
+                                width: 5,
+                              ),
+                              right: BorderSide(
+                                color: Colors.blueAccent,
+                                width: 5,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
                     },
                     child: const Text('Add to cart'),
                   ),

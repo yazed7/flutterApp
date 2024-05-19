@@ -5,6 +5,7 @@ import 'package:restaurant/Pages/HomePage.dart';
 
 import '../../../Favorite/view/page/favorite_page.dart';
 import '../../../Product/Page/product_page.dart';
+import '../../../cart/view/cart-page.dart';
 import '../cubit/dashboard_cubit.dart';
 
 class DashboardPage extends StatelessWidget {

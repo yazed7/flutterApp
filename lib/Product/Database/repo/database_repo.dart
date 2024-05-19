@@ -121,7 +121,7 @@ class DatabaseRepo {
           quantity: map['quantity'],
           price: map['price'],
           favorite: map['favorite'],
-          cart: map['cart'],
+          cart: (map['cart'] == 1) ? 1 : 0,
         );
         cartproducts.add(product);
       }
@@ -143,13 +143,25 @@ class DatabaseRepo {
     return productModel;
   }
 
-  void updateCart(int crt, int id) {
+  Future<int> newQuantity(ProductModel product) async {
+    int qnt = await db.update(
+      'product',
+      {
+        'quantity': product.quantity,
+      },
+      where: 'id = ?',
+      whereArgs: [product.id],
+    );
+    return qnt;
+  }
+
+  void updateCart(int id, bool value) {
     db.update(
       'product',
       {
-        'cart`': crt,
+        'cart': value ? 1 : 0,
       },
-      where: 'id =?',
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
