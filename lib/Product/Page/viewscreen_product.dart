@@ -47,7 +47,7 @@ class viewscreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (product.cart == 1) {
+                      if (product.cart == 0) {
                         procu.addItemtoCart(product.id ?? 0, true);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
