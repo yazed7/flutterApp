@@ -36,7 +36,7 @@ class LoginCubit extends Cubit<LoginState> {
   void onPressedConfirmButton(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic>? user =
-          await DatabaseHelper.instance.getUser(emailController.text);
+          await DatabaseHelper.user.getUser(emailController.text);
       if (user != null &&
           user['password'] == passwordController.text &&
           user['email'] == 'admin@gmail.com') {

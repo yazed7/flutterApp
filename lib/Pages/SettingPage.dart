@@ -26,7 +26,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   Future<void> _loadUsers() async {
-    final allUsers = await DatabaseHelper.instance.getAllUsers();
+    final allUsers = await DatabaseHelper.user.getAllUsers();
     setState(() {
       users = allUsers;
     });
@@ -46,7 +46,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   Future<void> _removeUser(String email) async {
-    await DatabaseHelper.instance.deleteUser(email);
+    await DatabaseHelper.user.deleteUser(email);
     if (email == currentUserEmail) {
       await _logout();
     } else {

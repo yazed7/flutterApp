@@ -48,7 +48,7 @@ class RegistertionCubit extends Cubit<RegistertionState> {
         'email': emailController.text,
         'password': passwordController.text,
       };
-      await DatabaseHelper.instance.insertUser(user);
+      await DatabaseHelper.user.insertUser(user);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('currentUserEmail', emailController.text);
       Navigator.pushNamed(context, '/login');
