@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/authentication/database/dbHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'registertion_state.dart';
 
@@ -41,13 +42,15 @@ class RegistertionCubit extends Cubit<RegistertionState> {
     return null;
   }
 
-  void onPressedConfirmButton(BuildContext context) {
+ void onPressedConfirmButton(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic> user = {
         'email': emailController.text,
         'password': passwordController.text,
       };
-      DatabaseHelper.instance.insertUser(user);
+      await DatabaseHelper.instance.insertUser(user);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('currentUserEmail', emailController.text);
       Navigator.pushNamed(context, '/login');
     }
   }

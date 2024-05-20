@@ -3,6 +3,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/authentication/database/dbHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_state.dart';
 
@@ -41,6 +42,8 @@ class LoginCubit extends Cubit<LoginState> {
           user['email'] == 'admin@gmail.com') {
         Navigator.pushNamed(context, '/admin_page');
       } else if (user != null && user['password'] == passwordController.text) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('currentUserEmail', emailController.text);
         Navigator.pushNamed(context, '/dashboard');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

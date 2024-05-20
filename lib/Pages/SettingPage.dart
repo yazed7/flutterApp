@@ -1,12 +1,58 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant/authentication/database/dbHelper.dart';
 import 'package:restaurant/themes/theme_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
+
+  @override
+  _SettingPageState createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
+  List<Map<String, dynamic>> users = [];
+  String? currentUserEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsers();
+    _loadCurrentUser();
+  }
+
+  Future<void> _loadUsers() async {
+    final allUsers = await DatabaseHelper.instance.getAllUsers();
+    setState(() {
+      users = allUsers;
+    });
+  }
+
+  Future<void> _loadCurrentUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      currentUserEmail = prefs.getString('currentUserEmail');
+    });
+  }
+
+  Future<void> _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('currentUserEmail');
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  Future<void> _removeUser(String email) async {
+    await DatabaseHelper.instance.deleteUser(email);
+    if (email == currentUserEmail) {
+      await _logout();
+    } else {
+      _loadUsers();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +89,42 @@ class SettingPage extends StatelessWidget {
                 //representing an on/off or true/false state
                 CupertinoSwitch(
                   value: Provider.of<ThemeProvider>(context, listen: false)
-                          .isDarkMode,//means the initial --> that dark mode --> off
+                      .isDarkMode,
                   onChanged: (value) =>
                       Provider.of<ThemeProvider>(context, listen: false)
                           .toggleTheme(),
                 ),
               ],
             ),
-          )
+          ),
+          Divider(
+            color: Colors.amber,
+          ),
+          Divider(
+            color: Colors.amber,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return ListTile(
+                  title: Text(
+                    user['email'],
+                    style: TextStyle(
+                      color: user['email'] == currentUserEmail
+                          ? Colors.red
+                          : Colors.blue,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () => _removeUser(user['email']),
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
