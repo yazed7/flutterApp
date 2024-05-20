@@ -35,12 +35,26 @@ class LoginCubit extends Cubit<LoginState> {
       Map<String, dynamic>? user =
           await DatabaseHelper.instance.getUser(emailController.text);
       if (user != null && user['password'] == passwordController.text) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/dashboard');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Please check Email or Password'),
-            duration: Duration(seconds: 3),
+            backgroundColor: Colors.amber,
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(20),
+            elevation: 5,
+            shape: Border(
+              left: BorderSide(
+                color: Colors.amber,
+                width: 5,
+              ),
+              right: BorderSide(
+                color: Colors.amber,
+                width: 5,
+              ),
+            ),
           ),
         );
       }

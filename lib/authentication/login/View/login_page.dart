@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          "Login to Restaurant App",
+                          "Login to Burger Restaurant ",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
                             fontSize: 20,
@@ -64,12 +64,13 @@ class LoginPage extends StatelessWidget {
                                 AutovalidateMode.onUserInteraction,
                             controller: controller.passwordController,
                             validator: controller.passwordValidation,
-                            obscureText: true,
                             decoration:
                                 Styles.textFieldDecoration(context).copyWith(
                               hintText: "Password",
                               prefixIcon: const Icon(Icons.lock),
+                            
                             ),
+                            obscureText: true,
                           ),
                         ),
                         const SizedBox(height: 20),

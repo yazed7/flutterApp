@@ -1,44 +1,49 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:restaurant/Components/description_box.dart';
-import 'package:restaurant/Components/drawer/drawer.dart';
-import 'package:restaurant/Components/sliver_app_bar.dart';
-import 'package:restaurant/Components/current_location.dart';
+import 'package:restaurant/Components/phone_contact.dart';
+import '../Components/current_location.dart';
+import '../Components/description_box.dart';
+import '../Components/drawer/drawer.dart';
+import '../Components/sliver_app_bar.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+  static const String routeName = '/home';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          MySliverAppBar(
-            title: Text('title'),
+          const MySliverAppBar(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Divider(
-                  color: Theme.of(context).colorScheme.secondary,
-                  indent: 25,
-                  endIndent: 25,
-                ),
                 // current location
-                const MyCurrentLocation(),
+                MyCurrentLocation(),
+
+                // contact
+                MyPhoneContact(),
 
                 //description box
-                const MyDescriptionBox(),
+                MyDescriptionBox(),
               ],
             ),
           ),
         ],
         body: Container(
-          color: Colors.red,
+          color: Colors.grey,
+          padding: const EdgeInsets.all(16.0),
+          child: GridView.count(
+            crossAxisCount: 2, // Create two columns
+            crossAxisSpacing: 10.0,
+            mainAxisSpacing: 10.0,
+            children: List.generate(6, (index) {
+              return Image.asset(
+                'assets/images/photo${index + 1}.jpg',
+                fit: BoxFit.cover,
+              );
+            }),
+          ),
         ),
       ),
     );

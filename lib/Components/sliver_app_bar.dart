@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
+import '../cart/view/cart-page.dart';
+
 class MySliverAppBar extends StatelessWidget {
   final Widget child;
-  final Widget title;
 
   const MySliverAppBar({
     super.key,
     required this.child,
-    required this.title,
   });
 
   @override
@@ -18,14 +18,16 @@ class MySliverAppBar extends StatelessWidget {
       pinned: true, //not all the screen
       floating: false,
       expandedHeight: 340, //down
-      collapsedHeight: 120, //up
+      collapsedHeight: 90, //up
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, CartPage.routeName);
+          },
           icon: Icon(Icons.shopping_cart),
         ),
       ],
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       foregroundColor:
           Theme.of(context).colorScheme.inversePrimary, //at the top
       title: const Text('Sunset Diner'),
@@ -34,7 +36,6 @@ class MySliverAppBar extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 50),
           child: child,
         ),
-        title: title,
         centerTitle: true,
         titlePadding: const EdgeInsets.only(left: 0, right: 0, top: 0),
         expandedTitleScale: 1,
