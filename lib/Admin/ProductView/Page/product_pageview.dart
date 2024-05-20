@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Pages/Dashboard/view/dashboard.dart';
-import '../../cart/view/page/cart-page.dart';
-import '../Components/product_item.dart';
-import '../cubit/product_cubit.dart';
-import './viewscreen_product.dart';
+import 'package:restaurant/Admin/ProductView/Components/product_itemciew.dart';
+import 'package:restaurant/Admin/add_products/view/page/add_product_view.dart';
+import 'package:restaurant/Admin/cubit/delete_cubit.dart';
 
-class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
-  static const routeName = '/product_page';
+import '../../../Product/cubit/product_cubit.dart';
+
+class ProductPageView extends StatelessWidget {
+  const ProductPageView({super.key});
+  static const routeName = '/product_pageview';
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +30,10 @@ class ProductPage extends StatelessWidget {
                     size: 30,
                   ),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, DashboardPage.routeName);
+                    Navigator.popAndPushNamed(
+                        context, AddProductPage.routeName);
                   },
                 ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    onPressed: () {
-                      Navigator.pushNamed(context, CartPage.routeName);
-                    },
-                  )
-                ],
                 toolbarHeight: 70,
               ),
               body: state is ProductStateLoading
@@ -52,15 +45,15 @@ class ProductPage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) =>
                               ListTile(
                             onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                ViewscreenProduct.routeName,
-                                arguments: products[index],
-                              );
+                              // Navigator.pushNamed(
+                              //   context,
+                              //   ViewscreenProduct.routeName,
+                              //   arguments: products[index],
+                              // );
                             },
-                            title: ProductItem(
+                            title: ProductItemView(
                               product: products[index],
-                              controller: productCubit,
+                              controller: DeleteCubit(),
                             ),
                           ),
                         ),

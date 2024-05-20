@@ -1,23 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant/Admin/ProductView/Page/product_pageview.dart';
+import 'package:restaurant/Admin/admin_page/admin-page.dart';
+import 'package:restaurant/Product/Page/viewscreen_product.dart';
+import 'package:restaurant/Product/cubit/product_cubit.dart';
+
+import 'Admin/add_products/view/page/add_product_view.dart';
 import 'Favorite/view/page/favorite_page.dart';
 import 'Pages/Dashboard/view/dashboard.dart';
 import 'Pages/HomePage.dart';
 import 'Product/Page/product_page.dart';
-import 'Product/Page/viewscreen_product.dart';
 import 'authentication/login/view/login_page.dart';
 import 'authentication/registration/view/register_page.dart';
-import 'cart/view/cart-page.dart';
+import 'cart/view/page/cart-page.dart';
 import 'themes/theme_provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MainApp(),
-    ),
-  );
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -25,21 +26,37 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-      routes: {
-        LoginPage.routeName: (context) => LoginPage(),
-        RegisterPage.routeName: (context) => RegisterPage(),
-        DashboardPage.routeName: (context) => DashboardPage(),
-        ProductPage.routeName: (context) => ProductPage(),
-        FavoritePage.routeName: (context) => FavoritePage(),
-        CartPage.routeName: (context) => CartPage(),
-        viewscreen.routeName: (context) => viewscreen(),
-        HomePage.routeName: (context) => HomePage(),
-      },
-      initialRoute: LoginPage.routeName,
-      theme: Provider.of<ThemeProvider>(context).themeData,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        BlocProvider(create: (_) => ProductCubit()),
+      ],
+      child: Consumer2<ThemeProvider, ProductCubit>(
+        builder: (context, themeProvider, productCubit, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: LoginPage(),
+            routes: {
+              AdminPage.routeName: (context) => AdminPage(),
+              ProductPageView.routeName: (context) => ProductPageView(),
+              AddProductPage.routeName: (context) => AddProductPage(),
+              LoginPage.routeName: (context) => LoginPage(),
+              RegisterPage.routeName: (context) => RegisterPage(),
+              DashboardPage.routeName: (context) => DashboardPage(),
+              ProductPage.routeName: (context) => ProductPage(),
+              FavoritePage.routeName: (context) => FavoritePage(),
+              CartPage.routeName: (context) => CartPage(),
+              ViewscreenProduct.routeName: (context) => ViewscreenProduct(
+                    productCubit: productCubit,
+                  ),
+              AddProductPage.routeName: (context) => AddProductPage(),
+              HomePage.routeName: (context) => HomePage(),
+            },
+            initialRoute: LoginPage.routeName,
+            theme: themeProvider.themeData,
+          );
+        },
+      ),
     );
   }
 }

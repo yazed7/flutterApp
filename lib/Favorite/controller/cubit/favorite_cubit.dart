@@ -24,6 +24,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
   }
 
+
   void addItemtoFavorite(int id, int value) {
     db.updateFavorite(value, id);
     init();

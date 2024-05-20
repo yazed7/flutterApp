@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/authentication/database/dbHelper.dart';
@@ -34,7 +36,11 @@ class LoginCubit extends Cubit<LoginState> {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic>? user =
           await DatabaseHelper.instance.getUser(emailController.text);
-      if (user != null && user['password'] == passwordController.text) {
+      if (user != null &&
+          user['password'] == passwordController.text &&
+          user['email'] == 'admin@gmail.com') {
+        Navigator.pushNamed(context, '/admin_page');
+      } else if (user != null && user['password'] == passwordController.text) {
         Navigator.pushNamed(context, '/dashboard');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
