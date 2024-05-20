@@ -2,7 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/Components/button.dart';
 
+import '../../../../themes/componentstheme.dart';
 import '../../cubit/add_product_cubit.dart';
 
 class AddProductForm extends StatelessWidget {
@@ -44,16 +46,20 @@ class AddProductForm extends StatelessWidget {
                 children: [
                   TextFormField(
                     controller: cubit.nameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Product Name',
+                    decoration: Styles.textFieldDecoration(context).copyWith(
+                      hintText: "Add Product Name",
+                      prefixIcon: const Icon(Icons.add),
+
                     ),
                     validator: cubit.nameValidator,
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
                     controller: cubit.descriptionController,
-                    decoration: const InputDecoration(
-                      labelText: 'Product Description',
+                    decoration: Styles.textFieldDecoration(context).copyWith(
+                      hintText: "Product Description",
+                      prefixIcon: const Icon(Icons.add),
+
                     ),
                     validator: cubit.descriptionValidator,
                   ),
@@ -61,15 +67,16 @@ class AddProductForm extends StatelessWidget {
                   TextFormField(
                     controller: cubit.priceController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Product Price',
+                    decoration: Styles.textFieldDecoration(context).copyWith(
+                      hintText: "Product Price",
+                      prefixIcon: const Icon(Icons.add),
                     ),
                     validator: cubit.priceValidator,
                   ),
                   const SizedBox(height: 16.0),
-                  ElevatedButton(
+                  Buttons(
                     onPressed: cubit.pickImage,
-                    child: const Text('Select Image'),
+                    text: 'Select Image',
                   ),
                   if (state is AddProductImageSelected)
                     FutureBuilder<Uint8List>(
@@ -94,13 +101,9 @@ class AddProductForm extends StatelessWidget {
                     ),
                   const SizedBox(height: 16.0),
                   Center(
-                    child: ElevatedButton(
+                    child: Buttons(
                       onPressed: cubit.addProduct,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
-                      ),
-                      child: const Text('Add Product'),
+                      text: 'Add Product',
                     ),
                   ),
                 ],

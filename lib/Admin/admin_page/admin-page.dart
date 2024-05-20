@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/Admin/ProductView/Page/product_pageview.dart';
 import 'package:restaurant/Admin/add_products/view/page/add_product_view.dart';
+import 'package:restaurant/Components/button.dart';
 import 'package:restaurant/authentication/login/view/login_page.dart';
 
 class AdminPage extends StatelessWidget {
@@ -13,18 +15,31 @@ class AdminPage extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-          const Text("Admin Page"),
-          ElevatedButton(
+          const Text(
+            "Admin Page",
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFFF8F00),
+            ),
+          ),
+          Buttons(
             onPressed: () {
               Navigator.pushNamed(context, AddProductPage.routeName);
             },
-            child: const Text("Add Product"),
+            text: "Add Product",
           ),
-          ElevatedButton(
+          Buttons(
+            onPressed: () {
+              Navigator.pushNamed(context, ProductPageView.routeName);
+            },
+            text: "View Product",
+          ),
+          Buttons(
             onPressed: () {
               Navigator.pushNamed(context, LoginPage.routeName);
             },
-            child: const Text("Logout"),
+            text: "Logout",
           ),
         ]))));
   }

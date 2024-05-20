@@ -22,7 +22,7 @@ class ProductPageView extends StatelessWidget {
 
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Menu'),
+                title: const Text('Products Added'),
                 backgroundColor: Theme.of(context).colorScheme.secondary,
                 leading: IconButton(
                   icon: const Icon(
