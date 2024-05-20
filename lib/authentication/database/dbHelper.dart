@@ -15,7 +15,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'your_database_name.db');
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path, version: 1, onCreate: _createDB,onUpgrade: _upgradeDB);
   }
 
   Future<void> _createDB(Database db, int version) async {
@@ -39,10 +39,24 @@ class DatabaseHelper {
     return await db.insert('users', row);
   }
 
+//for user logging
   Future<Map<String, dynamic>?> getUser(String email) async {
     Database db = await instance.database;
     List<Map<String, dynamic>> users =
         await db.query('users', where: 'email = ?', whereArgs: [email]);
     return users.isNotEmpty ? users.first : null;
   }
+
+//for show users
+  Future<List<Map<String, dynamic>>> getAllUsers() async {
+  Database db = await instance.database;
+  return await db.query('users');
+}
+
+Future<int> deleteUser(String email) async {
+  Database db = await instance.database;
+  return await db.delete('users', where: 'email = ?', whereArgs: [email]);
+}
+
+  
 }

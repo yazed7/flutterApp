@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/authentication/database/dbHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_state.dart';
 
@@ -35,6 +38,8 @@ class LoginCubit extends Cubit<LoginState> {
       Map<String, dynamic>? user =
           await DatabaseHelper.instance.getUser(emailController.text);
       if (user != null && user['password'] == passwordController.text) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('currentUserEmail', emailController.text);
         Navigator.pushNamed(context, '/dashboard');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
