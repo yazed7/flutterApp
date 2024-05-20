@@ -97,12 +97,6 @@ class _SettingPageState extends State<SettingPage> {
               ],
             ),
           ),
-          Divider(
-            color: Colors.amber,
-          ),
-          Divider(
-            color: Colors.amber,
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: users.length,

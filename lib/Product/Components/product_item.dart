@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import '../Database/entity_model/product_model.dart';
 import '../cubit/product_cubit.dart';
@@ -11,12 +10,7 @@ class ProductItem extends StatelessWidget {
   final ProductCubit controller;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 100,
-          width: 430,
-          child: Padding(
+    return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3),
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -29,15 +23,14 @@ class ProductItem extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
+          child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.memory(product.image??Uint8List(1), width: 60, height: 60,),
                     const SizedBox(width: 10),
-                    Flexible(
+              Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -48,14 +41,22 @@ class ProductItem extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                             ),
-                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${product.price} EGP',
+                      style: TextStyle(
+                        color: Colors.amber.shade800,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+              const SizedBox(width: 10),
                         InkWell(
                           child: product.favorite == 1
                               ? const Icon(
@@ -110,24 +111,11 @@ class ProductItem extends StatelessWidget {
                               );
                             }
                           },
-                        ),
-                        Text(
-                          '${product.price} EGP',
-                          style: TextStyle(
-                            color: Colors.amber.shade800,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
               ),
-            ),
+            ],
           ),
         ),
-      ],
-    );
+      ),
+    );     
   }
 }

@@ -1,8 +1,6 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../Database/entity_model/product_model.dart';
 import '../cubit/product_cubit.dart';
 
@@ -18,14 +16,14 @@ class ViewscreenProduct extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          product.name ?? 'Product Name',
-          style: const TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        // title: Text(
+        //   product.name ?? 'Product Name',
+        //   style: const TextStyle(
+        //     fontSize: 18.0,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_circle_left_outlined,
@@ -35,34 +33,45 @@ class ViewscreenProduct extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        toolbarHeight: 70,
+        toolbarHeight: 50,
       ),
       body: BlocProvider.value(
         value: productCubit,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        // child: Padding(
+        // padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.memory(product.image??Uint8List(1), width: 200, height: 200,),
+              child: Image.memory(
+                product.image ?? Uint8List(1),
+                width: 300,
+                height: 300,
+              ),
               ),
               const SizedBox(height: 16.0),
-              Text(
-                product.name ?? 'Product Name',
-                style: const TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  product.name ?? 'Product Name',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                '${product.price} EGP',
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  '${product.price} EGP',
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFF8F00),
+                  ),
                 ),
-              ),
+              ],
+            ),
               const SizedBox(height: 16.0),
               Text(
                 product.description ?? 'Product Description',
@@ -132,7 +141,7 @@ class ViewscreenProduct extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        // ),
       ),
     );
   }

@@ -29,24 +29,76 @@ class DashboardPage extends StatelessWidget {
                   FavoritePage(),
                 ],
               ),
-              bottomNavigationBar: BottomNavigationBar(
-                selectedItemColor: Colors.amber.shade800,
-                currentIndex: cont.currentIndex,
-                onTap: cont.onChangeTab,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home_filled),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.restaurant_menu_outlined),
-                    label: 'Menu',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.star_outlined),
-                    label: 'Faverites',
-                  ),
-                ],
+              bottomNavigationBar: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  selectedItemColor: Colors.amber.shade800,
+                  currentIndex: cont.currentIndex,
+                  onTap: cont.onChangeTab,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Container(
+                        decoration: cont.currentIndex == 0
+                            ? BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              )
+                            : null,
+                        child: const Icon(Icons.home_filled),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Container(
+                        decoration: cont.currentIndex == 1
+                            ? BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              )
+                            : null,
+                        child: const Icon(Icons.restaurant_menu_outlined),
+                      ),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Container(
+                        decoration: cont.currentIndex == 2
+                            ? BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              )
+                            : null,
+                        child: const Icon(Icons.star_outlined),
+                      ),
+                      label: '',
+                    ),
+                  ],
+                ),
               ),
             ),
           );

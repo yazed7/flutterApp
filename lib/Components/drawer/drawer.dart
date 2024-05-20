@@ -20,6 +20,16 @@ class MyDrawer extends StatelessWidget {
                 height: 80,
                 width: 80,
               ),
+
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "BURGER RESTAURANT",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(25),

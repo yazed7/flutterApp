@@ -32,14 +32,6 @@ class CartPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    onPressed: () {
-                      Navigator.pushNamed(context, CartPage.routeName);
-                    },
-                  )
-                ],
                 toolbarHeight: 70,
               ),
               body: state is CartStateLoading
@@ -61,37 +53,85 @@ class CartPage extends StatelessWidget {
                             ),
                           ),
                         ),
-              bottomNavigationBar: Container(
-                height: 80,
+              bottomNavigationBar: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                child: Container(
+                  height: 180,
                 color: Theme.of(context).colorScheme.secondary,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total: ${cartCubit.totalPrice} EGP',
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Delivery:',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            Text(
+                              ' 12.0 EGP',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFF8F00),
+                              ),
+                            ),
+                          ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Total:',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              ' ${cartCubit.totalPrice + 12.0} EGP',
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFF8F00),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 25,
                       ),
                       ElevatedButton(
                         onPressed: () {
                           // Navigator.pushNamed(context, CheckoutPage.routeName);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                            backgroundColor: const Color(0xFFFF8F00),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            minimumSize: const Size(double.infinity, 50),
                         ),
                         child: const Text(
                           'Checkout',
-                          style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                            ),
                         ),
                       ),
                     ],
                   ),
                 ),
+              ),
               ),
             );
           },
