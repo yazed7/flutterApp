@@ -1,23 +1,22 @@
-// ignore_for_file: file_names
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:restaurant/cart/cubit/cart_cubit.dart';
-import '../../../Product/Database/entity_model/product_model.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({
+import '../../../Product/Database/entity_model/product_model.dart';
+import '../../controller/cubit/favorite_cubit.dart';
+
+class FavoriteItem extends StatelessWidget {
+  const FavoriteItem({
     super.key,
     required this.product,
     required this.controller,
   });
 
   final ProductModel product;
-  final CartCubit controller;
+  final FavoriteCubit controller;
 
   @override
   Widget build(BuildContext context) {
-    final totalPrice = product.price! * (product.quantity ?? 1);
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: DecoratedBox(
@@ -35,7 +34,11 @@ class CartItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('${product.image}', width: 60, height: 60),
+              Image.memory(
+                product.image ?? Uint8List(1),
+                width: 60,
+                height: 60,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
@@ -50,27 +53,6 @@ class CartItem extends StatelessWidget {
                         fontSize: 15,
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${product.quantity} x ${product.price} EGP',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          '$totalPrice EGP',
-                          style: TextStyle(
-                            color: Colors.amber.shade800,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -79,30 +61,52 @@ class CartItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    child: product.cart == 1
-                        ? Icon(
-                            Icons.delete,
-                            color: Theme.of(context).colorScheme.inversePrimary,
+                    child: product.favorite == 1
+                        ? const Icon(
+                            Icons.star,
+                            color: Color.fromARGB(255, 227, 207, 27),
                           )
-                        : const Text(''),
+                        : const Icon(Icons.star_outline),
                     onTap: () {
-                      if (product.cart == 1) {
-                        controller.addItemToCart(product.id ?? 0, false, 0);
+                      if (product.favorite == 1) {
+                        controller.addItemtoFavorite(product.id ?? 0, 0);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Removed from cart'),
-                            backgroundColor: Colors.blueAccent,
+                            content: Text('Removed from favorites'),
+                            backgroundColor: Colors.amber,
                             duration: Duration(seconds: 1),
                             behavior: SnackBarBehavior.floating,
                             margin: EdgeInsets.all(20),
                             elevation: 5,
                             shape: Border(
                               left: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
                                 width: 5,
                               ),
                               right: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
+                                width: 5,
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        controller.addItemtoFavorite(product.id ?? 0, 1);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Added to favorites'),
+                            backgroundColor: Colors.amber,
+                            duration: Duration(seconds: 1),
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(20),
+                            elevation: 5,
+                            shape: Border(
+                              left: BorderSide(
+                                color: Colors.amber,
+                                width: 5,
+                              ),
+                              right: BorderSide(
+                                color: Colors.amber,
                                 width: 5,
                               ),
                             ),
@@ -110,6 +114,14 @@ class CartItem extends StatelessWidget {
                         );
                       }
                     },
+                  ),
+                  Text(
+                    '${product.price} EGP',
+                    style: TextStyle(
+                      color: Colors.amber.shade800,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),

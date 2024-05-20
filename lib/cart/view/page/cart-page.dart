@@ -4,7 +4,7 @@ import 'package:restaurant/Product/Page/viewscreen_product.dart';
 // import 'package:restaurant/checkout/view/checkout_page.dart';
 
 import '../components/cart-item.dart';
-import '../cubit/cart_cubit.dart';
+import '../../cubit/cart_cubit.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});

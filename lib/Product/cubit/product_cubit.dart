@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-
 import '../Database/entity_model/product_model.dart';
 import '../Database/repo/database_repo.dart';
 
@@ -9,8 +8,9 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductStateLoading()) {
     init();
   }
+  final DatabaseRepo db = DatabaseRepo();
   List<ProductModel> products = [];
-  DatabaseRepo db = DatabaseRepo();
+
   Future<void> init() async {
     emit(ProductStateLoading());
     await db.initDB();
@@ -24,9 +24,8 @@ class ProductCubit extends Cubit<ProductState> {
     //   favorite: 0,
     //   cart: 0,
     // ));
-    // await db.deleteProduct(ProductModel(id: 15));
+    // await db.deleteProduct(ProductModel(id: 3));
     products = await db.getAllProducts();
-
     if (products.isEmpty) {
       emit(ProductStateEmpty());
     } else {
@@ -34,14 +33,44 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  void addItemtoFavorite(int id, int value) {
+  Future<void> addItemToFavorite(int id, int value) async {
     db.updateFavorite(value, id);
+    await db.getFavoriteProducts();
     init();
     emit(ProductStateLoaded());
   }
 
-  void addItemtoCart(int id, bool value) async {
-    db.updateCart(id, value);
+  Future<void> addItemToCart(int id, bool value, int quantity) async {
+    db.updateCart(id, value, quantity);
+    init();
     emit(ProductStateLoaded());
+  }
+
+  Future<void> updateQuantity(ProductModel product, int quantity) async {
+    await db.updateQuantity(product, quantity);
+    init();
+    emit(ProductStateLoaded());
+  }
+
+  Future<void> deleteProduct(ProductModel product) async {
+    await db.deleteProduct(product);
+    init();
+    emit(ProductStateLoaded());
+  }
+
+  Future<void> increaseProductQuantity(ProductModel product) async {
+    if (product.quantity != null) {
+      product.quantity = product.quantity! + 1;
+      await db.newQuantity(product);
+      emit(ProductStateLoaded());
+    }
+  }
+
+  Future<void> decreaseProductQuantity(ProductModel product) async {
+    if (product.quantity != null && product.quantity! > 1) {
+      product.quantity = product.quantity! - 1;
+      await db.newQuantity(product);
+      emit(ProductStateLoaded());
+    }
   }
 }

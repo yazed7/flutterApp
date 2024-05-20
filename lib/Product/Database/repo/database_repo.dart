@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:sqflite/sqflite.dart';
 
 import '../entity_model/product_model.dart';
@@ -7,26 +9,26 @@ class DatabaseRepo {
 
   Future<void> initDB() async {
     db = await openDatabase(
-      '${await getDatabasesPath()}/productDB.db',
+      '${await getDatabasesPath()}/ProductsDB.db',
       version: 1,
-      onCreate: _onCraete,
+      onCreate: _onCreate,
       onUpgrade: (db, int oldVersion, int newVersion) async {
         await db.execute('''DROP TABLE product''');
-        await _onCraete(db, newVersion);
+        await _onCreate(db, newVersion);
       },
     );
   }
 
-  _onCraete(db, version) async {
+  Future<void> _onCreate(Database db, int version) async {
     await db.execute('''CREATE TABLE product(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             image TEXT,
-            description TEXT,
-            quantity INTEGER,
-            price INTEGER,
-            favorite INTEGER,
-            cart INTEGER)''');
+          name TEXT NOT NULL,
+          image BLOB,
+          description TEXT,
+          quantity INTEGER,
+          price INTEGER,
+          favorite INTEGER,
+          cart INTEGER)''');
   }
 
   Future<List<ProductModel>> getAllProducts() async {
@@ -44,10 +46,13 @@ class DatabaseRepo {
     if (maps.isNotEmpty) {
       for (var i = 0; i < maps.length; i++) {
         Map map = maps[i];
+        Uint8List? imageData = map['image'] != null
+            ? Uint8List.fromList(map['image'] as List<int>)
+            : null;
         ProductModel product = ProductModel(
           id: map['id'],
           name: map['name'],
-          image: map['image'],
+          image: imageData,
           description: map['description'],
           quantity: map['quantity'],
           price: map['price'],
@@ -76,24 +81,27 @@ class DatabaseRepo {
           'favorite',
           'cart'
         ]);
-    List<ProductModel> favproducts = [];
+    List<ProductModel> favProducts = [];
     if (maps.isNotEmpty) {
       for (var i = 0; i < maps.length; i++) {
         Map map = maps[i];
+        Uint8List? imageData = map['image'] != null
+            ? Uint8List.fromList(map['image'] as List<int>)
+            : null;
         ProductModel product = ProductModel(
           id: map['id'],
           name: map['name'],
-          image: map['image'],
+          image: imageData,
           description: map['description'],
           quantity: map['quantity'],
           price: map['price'],
           favorite: map['favorite'],
           cart: map['cart'],
         );
-        favproducts.add(product);
+        favProducts.add(product);
       }
     }
-    return favproducts;
+    return favProducts;
   }
 
   Future<List<ProductModel>> getCartProducts() async {
@@ -109,64 +117,51 @@ class DatabaseRepo {
       'favorite',
       'cart'
     ]);
-    List<ProductModel> cartproducts = [];
+    List<ProductModel> cartProducts = [];
     if (maps.isNotEmpty) {
       for (var i = 0; i < maps.length; i++) {
         Map map = maps[i];
+        Uint8List? imageData = map['image'] != null
+            ? Uint8List.fromList(map['image'] as List<int>)
+            : null;
         ProductModel product = ProductModel(
           id: map['id'],
           name: map['name'],
-          image: map['image'],
+          image: imageData,
           description: map['description'],
           quantity: map['quantity'],
           price: map['price'],
           favorite: map['favorite'],
           cart: (map['cart'] == 1) ? 1 : 0,
         );
-        cartproducts.add(product);
+        cartProducts.add(product);
       }
     }
-    return cartproducts;
+    return cartProducts;
   }
 
-  Future<ProductModel> insertProduct(ProductModel productModel) async {
-    int id = await db.insert('product', {
-      'name': productModel.name,
-      'description': productModel.description,
-      'quantity': productModel.quantity,
-      'price': productModel.price,
-      'image': productModel.image,
-      'favorite': 0,
-      'cart': 0,
-    });
-    productModel.id = id;
-    return productModel;
-  }
-
-  Future<int> newQuantity(ProductModel product) async {
-    int qnt = await db.update(
+  Future<int> updateQuantity(ProductModel product, int quantity) async {
+    return await db.update(
       'product',
-      {
-        'quantity': product.quantity,
-      },
+      {'quantity': quantity},
       where: 'id = ?',
       whereArgs: [product.id],
     );
-    return qnt;
   }
 
-  void updateCart(int id, bool value) {
+  void updateCart(int id, bool value, int quantity) {
     db.update(
       'product',
       {
         'cart': value ? 1 : 0,
+        'quantity': quantity,
       },
       where: 'id = ?',
       whereArgs: [id],
     );
   }
 
-  void updateFavorite(int fav, int id) {
+  updateFavorite(int fav, int id) {
     db.update(
       'product',
       {
@@ -178,11 +173,43 @@ class DatabaseRepo {
   }
 
   Future<int> deleteProduct(ProductModel product) async {
-    int id = await db.delete(
+    return await db.delete(
       'product',
       where: 'id = ?',
       whereArgs: [product.id],
     );
-    return id;
+  }
+
+  Future<int> newQuantity(ProductModel product) async {
+    return await db.update(
+      'product',
+      {
+        'quantity': product.quantity,
+      },
+      where: 'id = ?',
+      whereArgs: [product.id],
+    );
+  }
+
+  Future<ProductModel> insertProductToDB(ProductModel productModel) async {
+    int id = await db.insert('product', {
+      'name': productModel.name,
+      'description': productModel.description,
+      'quantity': productModel.quantity,
+      'price': productModel.price,
+      'image': productModel.image?.toList(),
+      'favorite': 0,
+      'cart': 0,
+    });
+    productModel.id = id;
+    return productModel;
+  }
+
+  Future<int> deleteProductfromDB(ProductModel product) async {
+    return await db.delete(
+      'product',
+      where: 'id = ?',
+      whereArgs: [product.id],
+    );
   }
 }

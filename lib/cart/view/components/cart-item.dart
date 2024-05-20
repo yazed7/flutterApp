@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:restaurant/cart/cubit/cart_cubit.dart';
+
 import '../../../Product/Database/entity_model/product_model.dart';
+import '../../cubit/cart_cubit.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
@@ -35,7 +38,7 @@ class CartItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('${product.image}', width: 60, height: 60),
+              Image.memory(product.image??Uint8List(1), width: 60, height: 60,),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(

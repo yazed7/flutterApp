@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Pages/Dashboard/view/dashboard.dart';
 import '../../../Product/Page/viewscreen_product.dart';
-import '../../../cart/view/cart-page.dart';
-import '../../Component/favorite_item.dart';
+import '../../../cart/view/page/cart-page.dart';
+import '../Component/favorite_item.dart';
 import '../../controller/cubit/favorite_cubit.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -53,7 +53,7 @@ class FavoritePage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) =>
                               ListTile(
                             onTap: () {
-                              Navigator.pushNamed(context, viewscreen.routeName,
+                              Navigator.pushNamed(context, ViewscreenProduct.routeName,
                                   arguments: productCubit.products[index]);
                             },
                             title: FavoriteItem(

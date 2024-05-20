@@ -37,7 +37,11 @@ class LoginCubit extends Cubit<LoginState> {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic>? user =
           await DatabaseHelper.instance.getUser(emailController.text);
-      if (user != null && user['password'] == passwordController.text) {
+      if (user != null &&
+          user['password'] == passwordController.text &&
+          user['email'] == 'admin@gmail.com') {
+        Navigator.pushNamed(context, '/admin_page');
+      } else if (user != null && user['password'] == passwordController.text) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('currentUserEmail', emailController.text);
         Navigator.pushNamed(context, '/dashboard');
