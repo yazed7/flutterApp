@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/Admin/cubit/delete_cubit.dart';
-import 'package:restaurant/Product/cubit/product_cubit.dart';
-
 import '../../../Product/Database/entity_model/product_model.dart';
 
 class ProductItemView extends StatelessWidget {
