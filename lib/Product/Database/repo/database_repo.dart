@@ -172,11 +172,11 @@ class DatabaseRepo {
     );
   }
 
-  Future<int> deleteProduct(ProductModel product) async {
+  Future<int> deleteProduct(int id) async {
     return await db.delete(
       'product',
       where: 'id = ?',
-      whereArgs: [product.id],
+      whereArgs: [id],
     );
   }
 
@@ -205,11 +205,5 @@ class DatabaseRepo {
     return productModel;
   }
 
-  Future<int> deleteProductfromDB(ProductModel product) async {
-    return await db.delete(
-      'product',
-      where: 'id = ?',
-      whereArgs: [product.id],
-    );
-  }
+
 }

@@ -5,73 +5,70 @@ import '../Database/entity_model/product_model.dart';
 import '../cubit/product_cubit.dart';
 
 class ViewscreenProduct extends StatelessWidget {
-  const ViewscreenProduct({super.key, required this.productCubit});
-  static const routeName = '/viewscreen';
-
-  final ProductCubit productCubit;
+  const ViewscreenProduct({super.key});
 
   @override
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context)?.settings.arguments as ProductModel;
+    final productCubit = context.read<ProductCubit>();
 
-    return Scaffold(
-      appBar: AppBar(
-        // title: Text(
-        //   product.name ?? 'Product Name',
-        //   style: const TextStyle(
-        //     fontSize: 18.0,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_circle_left_outlined,
-            size: 30,
+    return BlocProvider.value(
+      value: productCubit,
+      child: Scaffold(
+        appBar: AppBar(
+          // title: Text(
+          //   product.name ?? 'Product Name',
+          //   style: const TextStyle(
+          //     fontSize: 18.0,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_circle_left_outlined,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          toolbarHeight: 50,
         ),
-        toolbarHeight: 50,
-      ),
-      body: BlocProvider.value(
-        value: productCubit,
-        // child: Padding(
-        // padding: const EdgeInsets.all(16.0),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Center(
-              child: Image.memory(
-                product.image ?? Uint8List(1),
-                width: 300,
-                height: 300,
-              ),
+                child: Image.memory(
+                  product.image ?? Uint8List(1),
+                  width: 300,
+                  height: 300,
+                ),
               ),
               const SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  product.name ?? 'Product Name',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    product.name ?? 'Product Name',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
                   ),
-                ),
-                Text(
-                  '${product.price} EGP',
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFFF8F00),
+                  Text(
+                    '${product.price} EGP',
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFF8F00),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
               const SizedBox(height: 16.0),
               Text(
                 product.description ?? 'Product Description',
@@ -141,7 +138,7 @@ class ViewscreenProduct extends StatelessWidget {
               ),
             ],
           ),
-        // ),
+        ),
       ),
     );
   }

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../cart/view/page/cart-page.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget child;
@@ -22,7 +21,7 @@ class MySliverAppBar extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, CartPage.routeName);
+            Navigator.pushNamed(context, '/cart_page');
           },
           icon: Icon(Icons.shopping_cart),
         ),

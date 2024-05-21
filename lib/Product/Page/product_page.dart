@@ -37,7 +37,7 @@ class ProductPage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      Navigator.pushNamed(context, CartPage.routeName);
+                      Navigator.pushNamed(context, '/cart_page');
                     },
                   )
                 ],
@@ -54,7 +54,7 @@ class ProductPage extends StatelessWidget {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                ViewscreenProduct.routeName,
+                                '/viewscreen',
                                 arguments: products[index],
                               );
                             },

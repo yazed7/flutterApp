@@ -5,8 +5,7 @@ import '../cubit/registertion_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPage extends StatelessWidget {
-  // final void Function()? onTap;
-  static const String routeName = "/register";
+
 
   RegisterPage({super.key});
   final RegistertionCubit controller = RegistertionCubit();

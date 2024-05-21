@@ -5,7 +5,6 @@ import '../../../themes/componentstheme.dart';
 import '../cubit/login_cubit.dart';
 
 class LoginPage extends StatelessWidget {
-  static const String routeName = "/login";
 
   final LoginCubit controller = LoginCubit();
 

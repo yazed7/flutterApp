@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../cubit/add_product_cubit.dart';
 import '../component/add_product_form.dart';
 
 class AddProductPage extends StatelessWidget {
   const AddProductPage({super.key});
-  static const routeName = '/add_product';
 
   @override
   Widget build(BuildContext context) {

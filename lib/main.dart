@@ -1,28 +1,30 @@
-// ignore_for_file: prefer_const_constructors, equal_keys_in_map
+// main.dart
+// ignore_for_file: equal_keys_in_map
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant/Admin/ProductView/Page/product_pageview.dart';
-import 'package:restaurant/Admin/admin_page/admin-page.dart';
-import 'package:restaurant/Product/Page/viewscreen_product.dart';
 import 'package:restaurant/Product/cubit/product_cubit.dart';
-
-import 'Admin/add_products/view/page/add_product_view.dart';
-import 'Favorite/view/page/favorite_page.dart';
-import 'Pages/Dashboard/view/dashboard.dart';
-import 'Pages/HomePage.dart';
-import 'Product/Page/product_page.dart';
-import 'authentication/login/view/login_page.dart';
-import 'authentication/registration/view/register_page.dart';
-import 'cart/view/page/cart-page.dart';
+import 'package:restaurant/authentication/login/view/login_page.dart';
+import 'package:restaurant/onboarding/view/onboarding.dart';
+import 'package:restaurant/routing.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'themes/theme_provider.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  bool onboarding = sharedPreferences.getBool('onboarding') ?? false;
+
+  runApp(
+    MainApp(onboarding: onboarding),
+  );
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final bool onboarding;
+
+  const MainApp({super.key, required this.onboarding});
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +37,13 @@ class MainApp extends StatelessWidget {
         builder: (context, themeProvider, productCubit, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: LoginPage(),
-            routes: {
-              AdminPage.routeName: (context) => AdminPage(),
-              ProductPageView.routeName: (context) => ProductPageView(),
-              AddProductPage.routeName: (context) => AddProductPage(),
-              LoginPage.routeName: (context) => LoginPage(),
-              RegisterPage.routeName: (context) => RegisterPage(),
-              DashboardPage.routeName: (context) => DashboardPage(),
-              ProductPage.routeName: (context) => ProductPage(),
-              FavoritePage.routeName: (context) => FavoritePage(),
-              CartPage.routeName: (context) => CartPage(),
-              ViewscreenProduct.routeName: (context) => ViewscreenProduct(
-                    productCubit: productCubit,
-                  ),
-              AddProductPage.routeName: (context) => AddProductPage(),
-              HomePage.routeName: (context) => HomePage(),
-            },
-            initialRoute: LoginPage.routeName,
+            onGenerateRoute: Routes.onGenerateRoute,
+            onGenerateInitialRoutes: (_) => [
+              MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) =>
+                    onboarding ? LoginPage() : const OnBoardingPage(),
+              ),
+            ],
             theme: themeProvider.themeData,
           );
         },

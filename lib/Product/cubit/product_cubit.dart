@@ -14,17 +14,6 @@ class ProductCubit extends Cubit<ProductState> {
   Future<void> init() async {
     emit(ProductStateLoading());
     await db.initDB();
-    // await db.insertProduct(ProductModel(
-    //   name: 'DOUBLE MUSHROOM SWISS',
-    //   image: 'assets/images/product_02.png',
-    //   description: '''
-    //        Can't get enough of that heavenly creamy taste? Go for double the goodness! Melted Swiss cheese on two flame-grilled beef patties, topped with BK's special mushroom sauce, served on a sesame seed bun. Twice the velvety goodness in every bite.
-    //         ''',
-    //   price: 145,
-    //   favorite: 0,
-    //   cart: 0,
-    // ));
-    // await db.deleteProduct(ProductModel(id: 3));
     products = await db.getAllProducts();
     if (products.isEmpty) {
       emit(ProductStateEmpty());
@@ -52,11 +41,6 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductStateLoaded());
   }
 
-  Future<void> deleteProduct(ProductModel product) async {
-    await db.deleteProduct(product);
-    init();
-    emit(ProductStateLoaded());
-  }
 
   Future<void> increaseProductQuantity(ProductModel product) async {
     if (product.quantity != null) {

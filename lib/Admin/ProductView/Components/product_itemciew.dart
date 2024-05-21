@@ -1,12 +1,19 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:restaurant/Admin/cubit/delete_cubit.dart';
+import 'package:restaurant/Admin/ProductView/cubit/productview_cubit.dart';
+
 import '../../../Product/Database/entity_model/product_model.dart';
 
 class ProductItemView extends StatelessWidget {
-  const ProductItemView(
-      {super.key, required this.product, required this.controller});
+  const ProductItemView({
+    super.key,
+    required this.product,
+    required this.controller,
+  });
+
   final ProductModel product;
-  final DeleteCubit controller;
+  final ProductViewCubit controller;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +38,18 @@ class ProductItemView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset('${product.image}', width: 60, height: 60),
+                    if (product.image != null)
+                      Image.memory(
+                        product.image!,
+                        width: 60,
+                        height: 60,
+                      )
+                    else
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: Icon(Icons.image_not_supported),
+                      ),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Column(
@@ -57,8 +75,7 @@ class ProductItemView extends StatelessWidget {
                         InkWell(
                           child: const Icon(Icons.delete),
                           onTap: () {
-                            // if (product.favorite == 1) {
-                            controller.deleteProduct(product.id ?? 0);
+                            controller.deleteProduct(product);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Removed from Database'),
@@ -79,7 +96,6 @@ class ProductItemView extends StatelessWidget {
                                 ),
                               ),
                             );
-                            // }
                           },
                         ),
                         Text(
