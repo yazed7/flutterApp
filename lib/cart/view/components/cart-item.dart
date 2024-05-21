@@ -94,18 +94,18 @@ class CartItem extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Removed from cart'),
-                            backgroundColor: Colors.blueAccent,
+                            backgroundColor: Colors.amber,
                             duration: Duration(seconds: 1),
                             behavior: SnackBarBehavior.floating,
                             margin: EdgeInsets.all(20),
                             elevation: 5,
                             shape: Border(
                               left: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
                                 width: 5,
                               ),
                               right: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
                                 width: 5,
                               ),
                             ),

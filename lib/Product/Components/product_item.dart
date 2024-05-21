@@ -29,8 +29,7 @@ class ProductItem extends StatelessWidget {
                     Image.memory(product.image??Uint8List(1), width: 60, height: 60,),
                     const SizedBox(width: 10),
               Expanded(
-                      child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
+                child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(

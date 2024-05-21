@@ -37,7 +37,7 @@ class RegisterPage extends StatelessWidget {
                         ),
                         //message app
                         Text(
-                          "Create an account to Restaurant App",
+                          "Create an account to Burger Restaurant",
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
                             fontSize: 20,

@@ -31,7 +31,7 @@ class AddProductCubit extends Cubit<AddProductState> {
         image: await image!.readAsBytes(),
         favorite: 0,
         cart: 0,
-        quantity: 0,
+        quantity: 1,
       );
       await _db.initDB();
       await _db.insertProductToDB(product);

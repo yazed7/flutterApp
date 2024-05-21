@@ -26,7 +26,7 @@ class FavoriteItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.memory(
                 product.image ?? Uint8List(1),
@@ -36,7 +36,6 @@ class FavoriteItem extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -44,7 +43,7 @@ class FavoriteItem extends StatelessWidget {
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.inversePrimary,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 15,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
