@@ -6,7 +6,7 @@ import '../cubit/product_cubit.dart';
 
 class ViewscreenProduct extends StatelessWidget {
   const ViewscreenProduct({super.key});
-
+  static const routeName = '/viewscreen';
   @override
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context)?.settings.arguments as ProductModel;
@@ -16,13 +16,6 @@ class ViewscreenProduct extends StatelessWidget {
       value: productCubit,
       child: Scaffold(
         appBar: AppBar(
-          // title: Text(
-          //   product.name ?? 'Product Name',
-          //   style: const TextStyle(
-          //     fontSize: 18.0,
-          //     fontWeight: FontWeight.bold,
-          //   ),
-          // ),
           backgroundColor: Colors.transparent,
           leading: IconButton(
             icon: const Icon(

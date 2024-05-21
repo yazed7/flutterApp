@@ -1,30 +1,29 @@
-// main.dart
-// ignore_for_file: equal_keys_in_map
-
+// ignore_for_file: prefer_const_constructors, equal_keys_in_map
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant/Admin/ProductView/Page/product_pageview.dart';
+import 'package:restaurant/Admin/admin_page/admin-page.dart';
+import 'package:restaurant/Product/Page/viewscreen_product.dart';
 import 'package:restaurant/Product/cubit/product_cubit.dart';
-import 'package:restaurant/authentication/login/view/login_page.dart';
-import 'package:restaurant/onboarding/view/onboarding.dart';
-import 'package:restaurant/routing.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:restaurant/authentication/login/View/login_page.dart';
+import 'package:restaurant/authentication/registration/View/register_page.dart';
+
+import 'Admin/add_products/view/page/add_product_view.dart';
+import 'Favorite/view/page/favorite_page.dart';
+import 'Pages/Dashboard/view/dashboard.dart';
+import 'Pages/HomePage.dart';
+import 'Product/Page/product_page.dart';
+
+import 'cart/view/page/cart-page.dart';
 import 'themes/theme_provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  bool onboarding = sharedPreferences.getBool('onboarding') ?? false;
-
-  runApp(
-    MainApp(onboarding: onboarding),
-  );
+void main() {
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  final bool onboarding;
-
-  const MainApp({super.key, required this.onboarding});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +36,22 @@ class MainApp extends StatelessWidget {
         builder: (context, themeProvider, productCubit, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            onGenerateRoute: Routes.onGenerateRoute,
-            onGenerateInitialRoutes: (_) => [
-              MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) =>
-                    onboarding ? LoginPage() : const OnBoardingPage(),
-              ),
-            ],
+            home: LoginPage(),
+            routes: {
+              AdminPage.routeName: (context) => AdminPage(),
+              ProductPageView.routeName: (context) => ProductPageView(),
+              AddProductPage.routeName: (context) => AddProductPage(),
+              LoginPage.routeName: (context) => LoginPage(),
+              RegisterPage.routeName: (context) => RegisterPage(),
+              DashboardPage.routeName: (context) => DashboardPage(),
+              ProductPage.routeName: (context) => ProductPage(),
+              FavoritePage.routeName: (context) => FavoritePage(),
+              CartPage.routeName: (context) => CartPage(),
+              ViewscreenProduct.routeName: (context) => ViewscreenProduct(),
+              AddProductPage.routeName: (context) => AddProductPage(),
+              HomePage.routeName: (context) => HomePage(),
+            },
+            initialRoute: LoginPage.routeName,
             theme: themeProvider.themeData,
           );
         },

@@ -4,10 +4,12 @@ import 'package:restaurant/Admin/ProductView/Components/product_itemciew.dart';
 import 'package:restaurant/Admin/ProductView/cubit/productview_cubit.dart';
 import 'package:restaurant/Admin/ProductView/cubit/productview_state.dart';
 
-import '../../../Product/cubit/product_cubit.dart';
+import '../../add_products/view/page/add_product_view.dart';
+
 
 class ProductPageView extends StatelessWidget {
   const ProductPageView({super.key});
+  static const routeName = '/product_pageview';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,8 @@ class ProductPageView extends StatelessWidget {
                     size: 30,
                   ),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/add_product');
+                    Navigator.popAndPushNamed(
+                        context, AddProductPage.routeName);
                   },
                 ),
                 toolbarHeight: 70,

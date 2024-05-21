@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/Admin/ProductView/Page/product_pageview.dart';
 import 'package:restaurant/Components/button.dart';
+import 'package:restaurant/authentication/login/View/login_page.dart';
+
+import '../add_products/view/page/add_product_view.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
+  static const routeName = '/admin_page';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,19 +27,19 @@ class AdminPage extends StatelessWidget {
           ),
           Buttons(
             onPressed: () {
-              Navigator.pushNamed(context, '/add_product');
+              Navigator.pushNamed(context, AddProductPage.routeName);
             },
             text: "Add Product",
           ),
           Buttons(
             onPressed: () {
-              Navigator.pushNamed(context, '/product_pageview');
+              Navigator.pushNamed(context, ProductPageView.routeName);
             },
             text: "View Product",
           ),
           Buttons(
             onPressed: () {
-              Navigator.pushNamed(context, '/login');
+              Navigator.pushNamed(context, LoginPage.routeName);
             },
             text: "Logout",
           ),

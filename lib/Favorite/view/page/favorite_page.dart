@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Product/Page/viewscreen_product.dart';
 import '../Component/favorite_item.dart';
 import '../../controller/cubit/favorite_cubit.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
-   
+  static const routeName = '/favorite_page';
+
   @override
   Widget build(BuildContext context) {
     final FavoriteCubit productCubit = FavoriteCubit();
@@ -48,7 +50,8 @@ class FavoritePage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) =>
                               ListTile(
                             onTap: () {
-                              Navigator.pushNamed(context, '/viewscreen',
+                              Navigator.pushNamed(
+                                  context, ViewscreenProduct.routeName,
                                   arguments: productCubit.products[index]);
                             },
                             title: FavoriteItem(

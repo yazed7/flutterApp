@@ -38,18 +38,11 @@ class ProductItemView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    if (product.image != null)
-                      Image.memory(
-                        product.image!,
-                        width: 60,
-                        height: 60,
-                      )
-                    else
-                      const SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: Icon(Icons.image_not_supported),
-                      ),
+                    Image.memory(
+                      product.image ?? Uint8List(1),
+                      width: 60,
+                      height: 60,
+                    ),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Column(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/Product/Page/viewscreen_product.dart';
 import '../../Pages/Dashboard/view/dashboard.dart';
 import '../../cart/view/page/cart-page.dart';
 import '../Components/product_item.dart';
 import '../cubit/product_cubit.dart';
-import './viewscreen_product.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -37,7 +37,7 @@ class ProductPage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/cart_page');
+                      Navigator.pushNamed(context, CartPage.routeName);
                     },
                   )
                 ],
@@ -54,7 +54,7 @@ class ProductPage extends StatelessWidget {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                '/viewscreen',
+                                ViewscreenProduct.routeName,
                                 arguments: products[index],
                               );
                             },

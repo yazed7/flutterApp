@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPage extends StatelessWidget {
 
+  static const String routeName = "/register";
 
   RegisterPage({super.key});
   final RegistertionCubit controller = RegistertionCubit();

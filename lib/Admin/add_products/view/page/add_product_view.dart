@@ -5,6 +5,7 @@ import '../component/add_product_form.dart';
 
 class AddProductPage extends StatelessWidget {
   const AddProductPage({super.key});
+  static const routeName = '/add_product';
 
   @override
   Widget build(BuildContext context) {
