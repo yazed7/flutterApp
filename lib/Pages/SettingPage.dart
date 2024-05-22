@@ -97,23 +97,41 @@ class _SettingPageState extends State<SettingPage> {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Text(
+              "U S E R S : ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                // color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
-                return ListTile(
-                  title: Text(
-                    user['email'],
-                    style: TextStyle(
-                      color: user['email'] == currentUserEmail
-                          ? Colors.red
-                          : Colors.blue,
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
                     ),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete, color: Colors.red),
-                    onPressed: () => _removeUser(user['email']),
+                  child: ListTile(
+                    title: Text(
+                      user['email'],
+                      style: TextStyle(
+                        color: user['email'] == currentUserEmail
+                            ? Colors.pink
+                            : Colors.blue,
+                      ),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete, color: Colors.red),
+                      onPressed: () => _removeUser(user['email']),
+                    ),
                   ),
                 );
               },
