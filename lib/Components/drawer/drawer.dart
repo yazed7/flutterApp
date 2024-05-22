@@ -31,10 +31,10 @@ class MyDrawer extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(25),
+            const Padding(
+              padding: EdgeInsets.all(25),
               child: Divider(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Colors.black,
               ),
             ),
 
