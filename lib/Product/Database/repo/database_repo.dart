@@ -205,5 +205,14 @@ class DatabaseRepo {
     return productModel;
   }
 
+  Future<void> deleteAllCartProducts() async {
+    print('Deleting all products from the cart in DatabaseRepo...');
 
+    await initDB();
+    await db.update(
+      'product',
+      {'cart': 0},
+    );
+    print('All products deleted from the cart in DatabaseRepo.');
+  }
 }

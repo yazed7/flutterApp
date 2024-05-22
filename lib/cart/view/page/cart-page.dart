@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/Checkout/CheckoutPage.dart';
 import 'package:restaurant/Product/Page/viewscreen_product.dart';
 import '../components/cart-item.dart';
 import '../../cubit/cart_cubit.dart';
@@ -59,9 +60,9 @@ class CartPage extends StatelessWidget {
                 ),
                 child: Container(
                   height: 180,
-                color: Theme.of(context).colorScheme.secondary,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  color: Theme.of(context).colorScheme.secondary,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -106,31 +107,55 @@ class CartPage extends StatelessWidget {
                         ),
                         const SizedBox(
                           height: 25,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Navigator.pushNamed(context, CheckoutPage.routeName);
-                        },
-                        style: ElevatedButton.styleFrom(
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (cartCubit.products.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Cart is Empty !'),
+                                  backgroundColor: Colors.amber,
+                                  duration: Duration(seconds: 1),
+                                  behavior: SnackBarBehavior.floating,
+                                  margin: EdgeInsets.all(20),
+                                  elevation: 5,
+                                  shape: Border(
+                                    left: BorderSide(
+                                      color: Colors.amber,
+                                      width: 5,
+                                    ),
+                                    right: BorderSide(
+                                      color: Colors.amber,
+                                      width: 5,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Navigator.pushNamed(
+                                  context, CheckoutPage.routeName);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFFF8F00),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             minimumSize: const Size(double.infinity, 50),
-                        ),
-                        child: const Text(
-                          'Checkout',
+                          ),
+                          child: const Text(
+                            'Checkout',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                             ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
               ),
             );
           },

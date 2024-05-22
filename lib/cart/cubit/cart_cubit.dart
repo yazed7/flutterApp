@@ -8,8 +8,8 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartStateLoading()) {
     init();
   }
-    double totalPrice = 0.0;
-  
+  double totalPrice = 0.0;
+
   double getTotalPrice() {
     for (var product in products) {
       totalPrice += (product.price! * (product.quantity ?? 1));
@@ -20,6 +20,7 @@ class CartCubit extends Cubit<CartState> {
   List<ProductModel> products = [];
   DatabaseRepo db = DatabaseRepo();
   Future<void> init() async {
+    print('Initializing CartCubit...');
     emit(CartStateLoading());
     await db.initDB();
 
@@ -42,5 +43,15 @@ class CartCubit extends Cubit<CartState> {
     db.newQuantity(ProductModel(id: id, quantity: quantity));
     init();
     emit(CartStateLoaded());
+  }
+
+  // Method to delete all products from the cart
+  Future<void> deleteAllProducts() async {
+    print('Deleting all products from the cart...');
+
+    await db.deleteAllCartProducts();
+    init();
+    emit(CartStateEmpty());
+    print('All products deleted from the cart.');
   }
 }
