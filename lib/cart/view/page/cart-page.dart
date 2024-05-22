@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/Checkout/CheckoutPage.dart';
 import 'package:restaurant/Product/Page/viewscreen_product.dart';
-import '../components/cart-item.dart';
+import '../../components/cart-item.dart';
 import '../../cubit/cart_cubit.dart';
 
 class CartPage extends StatelessWidget {
@@ -13,7 +13,6 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartCubit cartCubit = CartCubit();
-
     return SafeArea(
       child: BlocProvider.value(
         value: cartCubit,
@@ -96,7 +95,7 @@ class CartPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              ' ${cartCubit.totalPrice + 12.0} EGP',
+                              ' ${cartCubit.totalPrice == 0 ? 0.0 : cartCubit.totalPrice + 12.0} EGP',
                               style: const TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -110,31 +109,8 @@ class CartPage extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if (cartCubit.products.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Cart is Empty !'),
-                                  backgroundColor: Colors.amber,
-                                  duration: Duration(seconds: 1),
-                                  behavior: SnackBarBehavior.floating,
-                                  margin: EdgeInsets.all(20),
-                                  elevation: 5,
-                                  shape: Border(
-                                    left: BorderSide(
-                                      color: Colors.amber,
-                                      width: 5,
-                                    ),
-                                    right: BorderSide(
-                                      color: Colors.amber,
-                                      width: 5,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            } else {
-                              Navigator.pushNamed(
-                                  context, CheckoutPage.routeName);
-                            }
+                            Navigator.pushNamed(
+                                context, CheckoutPage.routeName);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFFF8F00),

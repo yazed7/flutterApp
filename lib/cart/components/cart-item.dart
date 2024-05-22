@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant/cart/cubit/cart_cubit.dart';
-import '../../../Product/Database/entity_model/product_model.dart';
+
+import '../../../../Product/Database/entity_model/product_model.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
@@ -35,7 +38,11 @@ class CartItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('${product.image}', width: 60, height: 60),
+              Image.memory(
+                product.image ?? Uint8List(1),
+                width: 60,
+                height: 60,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
@@ -87,22 +94,22 @@ class CartItem extends StatelessWidget {
                         : const Text(''),
                     onTap: () {
                       if (product.cart == 1) {
-                        controller.addItemToCart(product.id ?? 0, false, 0);
+                        controller.removeFromCart(product.id ?? 0);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Removed from cart'),
-                            backgroundColor: Colors.blueAccent,
+                            backgroundColor: Colors.amber,
                             duration: Duration(seconds: 1),
                             behavior: SnackBarBehavior.floating,
                             margin: EdgeInsets.all(20),
                             elevation: 5,
                             shape: Border(
                               left: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
                                 width: 5,
                               ),
                               right: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.amber,
                                 width: 5,
                               ),
                             ),

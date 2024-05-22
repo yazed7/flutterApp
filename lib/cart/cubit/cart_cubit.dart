@@ -32,7 +32,17 @@ class CartCubit extends Cubit<CartState> {
       emit(CartStateLoaded());
     }
   }
-
+  Future<void> removeFromCart(int id) async {
+    db.updateCart(id, false, 0);
+    products.removeWhere((product) => product.id == id);
+    totalPrice = 0.0;
+    getTotalPrice();
+    if (products.isEmpty) {
+      emit(CartStateEmpty());
+    } else {
+      emit(CartStateLoaded());
+    }
+  }
   Future<void> addItemToCart(int id, bool value, int quantity) async {
     db.updateCart(id, value, quantity);
     init();

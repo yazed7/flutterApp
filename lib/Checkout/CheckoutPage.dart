@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/Components/button.dart';
+import 'package:restaurant/Pages/Dashboard/view/dashboard.dart';
 import 'package:restaurant/Pages/HomePage.dart';
 import 'package:restaurant/Product/Page/product_page.dart';
 import 'package:restaurant/cart/cubit/cart_cubit.dart';
@@ -97,7 +98,7 @@ class CheckoutPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ProductPage()));
+                                builder: (context) => DashboardPage()));
                         print('Products deleted from the cart. Navigating back...');
                       }
                     },
