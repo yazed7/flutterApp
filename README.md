@@ -15,19 +15,19 @@
 
 - This Flutter App is comprehensive mobile application designed to enhance the restaurant experience for both customers and restaurant owners. Built using Flutter and Dart, the app offers a seamless and engaging interface, ensuring a smooth experience across both Android and iOS platforms.
   
-###Restaurant Experience
+### Restaurant Experience
 This Flutter App aims to revolutionize the way customers interact with restaurants. Users can browse the menu, place orders, and make reservations directly from their mobile devices. The app provides detailed descriptions and images of dishes, helping users make informed decisions. Additionally, the app includes features for customer feedback and ratings, allowing restaurants to continually improve their services.
 
-###Security
+### Security
 Security is a top priority for FlutterApp. The app uses Firebase Authentication to ensure secure login and registration processes. All user data is encrypted and securely stored, providing peace of mind for both users and restaurant owners.
 
-###State Management with Cubit
+### State Management with Cubit
 FlutterApp employs Cubit, a lightweight and intuitive state management solution, to manage the state of the application efficiently. Cubit helps in handling user interactions and data flow within the app, ensuring a responsive and smooth user experience.
 
-###Authentication and Validation
+### Authentication and Validation
 The app includes robust authentication and validation mechanisms. Users can sign up and log in using their email and password, with email verification to enhance security. Form validation is implemented to ensure that user inputs are correct and complete, preventing errors and enhancing the overall user experience.
 
-###SQLite Database
+### SQLite Database
 To manage and store data locally, FlutterApp integrates SQLite, a powerful and reliable database engine. SQLite is used to store user preferences, order history, and other critical data, ensuring that the app remains functional even without an internet connection.
 
 ## Features
